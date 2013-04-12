@@ -53,29 +53,23 @@ void MultiplyWithAMP() {
 
 	product.synchronize();
 
-	std::cout << (void*)aMatrix << std::endl;
-	std::cout << (void*)bMatrix << std::endl;
-	std::cout << (void*)productMatrix << std::endl;
-
-#if 0
 	for (int row = 0; row < 3; row++) {
 		for (int col = 0; col < 3; col++) {
-			//std::cout << productMatrix[row*3 + col] << "  ";
-			std::cout << product(row, col) << "  ";
+			std::cout << productMatrix[row*3 + col] << "  ";
+			//std::cout << product(row, col) << "  ";
 		}
 		std::cout << "\n";
 	}
-#endif
 }
 
-#else
+#endif
 
 void MultiplyWithOutAMP() {
 
 	int aMatrix[3][2] = {{1, 4}, {2, 5}, {3, 6}};
 	int bMatrix[2][3] = {{7, 8, 9}, {10, 11, 12}};
 	int product[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
-	
+
 	for (int row = 0; row < 3; row++) {
 		for (int col = 0; col < 3; col++) {
 			// Multiply the row of A by the column of B to get the row, column of product.
@@ -88,15 +82,11 @@ void MultiplyWithOutAMP() {
 	}
 }
 
-#endif
-
 int main() {
 #if __CXXAMP__
 	MultiplyWithAMP();
-#else
-	MultiplyWithOutAMP();
-	getwchar();
 #endif
+	MultiplyWithOutAMP();
 	return 0;
 }
 

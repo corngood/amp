@@ -12,10 +12,10 @@ test.ast: test.cc
 	~/obj/llvm/Release+Asserts/bin/clang++ -cc1 -S -ast-dump -fc++amp -Wall -Werror -std=c++11 -I. test.cc > test.ast
 
 test.ll: test.cc
-	~/obj/llvm/Release+Asserts/bin/clang++ -cc1 -S -emit-llvm -fc++amp -Wall -Werror -std=c++11 -I. test.cc -o test.ll
+	~/obj/llvm/Release+Asserts/bin/clang++ -cc1 -g -S -emit-llvm -fc++amp -Wall -Werror -std=c++11 -I. test.cc -o test.ll
 
 test.opt.ll: test.ll test.ptx
-	~/obj/llvm/Release+Asserts/bin/opt -amp-create-stubs -amp-kernel-file test.ptx -O3 -S test.ll -o test.opt.ll
+	~/obj/llvm/Release+Asserts/bin/opt -amp-create-stubs -amp-kernel-file test.ptx -S test.ll -o test.opt.ll
 
 test.amp.ll: test.cc
 	~/obj/llvm/Release+Asserts/bin/clang++ -cc1 -S -emit-llvm -fc++amp -fc++amp-is-kernel -Wall -Werror -std=c++11 -I. test.cc -o test.amp.ll
