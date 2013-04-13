@@ -68,7 +68,9 @@ namespace concurrency
 
 	template <typename ValueType, int Rank = 1> class array_view
 	{
+	public: //HACK: accessor compatibility until properties work
 		extent<Rank> extent;
+	private:
 		ValueType __AMP_global * data;
 		cl::Buffer buffer;
 
@@ -91,11 +93,6 @@ namespace concurrency
 		{
 			extent[0] = size0;
 			extent[1] = size1;
-		}
-
-		concurrency::extent<Rank> get_extent() const
-		{
-			return extent;
 		}
 
 		ValueType __AMP_global &operator[](index<Rank> const &index) const
